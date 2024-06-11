@@ -22,7 +22,7 @@ def produce_trades(
     topic = app.topic(name = kafka_topic, value_serializer = 'json')
 
     # Creating Kafka API Instance
-    kraken_api = KrakenWebSocketTradeAPI()
+    kraken_api = KrakenWebSocketTradeAPI(product_id='BTC/USD')
 
 
     #event = {"id": "1", "text": "Lorem ipsum dolor sit amet"}
@@ -36,7 +36,7 @@ def produce_trades(
             
             for trade in trades:
                 # Serialize an event using the defined Topic 
-                message = topic.serialize(key=trade["product_ID"], 
+                message = topic.serialize(key=trade["product_id"], 
                                           value=trade)
 
                 # Produce a message into the Kafka topic
