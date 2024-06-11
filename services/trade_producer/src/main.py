@@ -1,5 +1,6 @@
 from quixstreams import Application 
 from src.kraken_api import KrakenWebSocketTradeAPI
+from typing import List, Dict
 
 def produce_trades(
         kafka_broker_address: str,
@@ -32,7 +33,7 @@ def produce_trades(
 
         while True:
             # Get trades from Kraken API
-            trades = kraken_api.get_trades()
+            trades: List[Dict] = kraken_api.get_trades()
             
             for trade in trades:
                 # Serialize an event using the defined Topic 
